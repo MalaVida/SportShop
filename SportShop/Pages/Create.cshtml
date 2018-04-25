@@ -1,0 +1,53 @@
+﻿@page 
+@model SportShop.Pages.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<p>Enter your name : </p>
+<form method="post">
+    <div asp-validation-summary="All"></div>
+    <span asp-validation-for="Customer.Name"></span>
+    <div>
+        Name: <input asp-for="Customer.Name" />
+        <input type="submit" />
+    </div>
+</form>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                
+                <td>@customer.Id</td>
+                <td>@customer.Name</td>
+                <td><a asp-page="./Edit" asp-route-id="@customer.Id">Edit</a>
+                <button type="submit" asp-page-handler="delete" asp-route-id="@customer.Id">Delete</button>
+                </td>
+            </tr>
+        }
+        <tbody>
+            <tr>
+                For something here
+                <td></td>
+                <td></td>
+                
+            </tr>
+        </tbody>
+    </table>
+
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
